@@ -17,6 +17,10 @@ int main(int argc, char** argv) {
 	lista<int> a;
 	
 	a.insertar(10,2);
+	a.insertar(5,3);
+	a.insertar(6,4);
+	a.insertar(12,5);
+	a.imprimir();
 
 	return 0;
 }
