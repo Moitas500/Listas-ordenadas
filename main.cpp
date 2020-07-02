@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
 	a.insertar(6,4);
 	a.insertar(12,5);
 	a.imprimir();
+	a.borrar(6);
+	a.imprimir();
 
 	return 0;
 }

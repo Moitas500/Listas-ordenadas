@@ -17,7 +17,7 @@ class lista{nodo <T> *cab;
 	public: lista(){cab=NULL; tam=0;}
 			bool lista_vacia();
 			void insertar(int codigo, T info);
-			bool borrar(int pos);
+			void borrar(int clave);
 			bool buscar (int pos, T *infoRet);
 			bool cambiar(int pos, T infoNueva);	
 			void imprimir();
@@ -80,31 +80,35 @@ void lista <T>::insertar(int codigo, T info)
 				atras->sig = nuevo;
 			}
 		}
-	}	
+	}
+	tam++;	
 }
 
 template <class T>
-bool lista<T>::borrar(int pos)
-{ if(tam >= pos)
-     { nodo <T> *temp;
-       temp = cab;
-       if(pos == 1)
-         {cab = temp->sig;
-          delete temp;
-         }
-       else
-         {for(int i=1;i<pos-1;i++)
-             {temp = temp->sig;}          
-          nodo <T> *aux;
-          aux = temp->sig;
-          temp->sig = aux->sig;
-          delete aux;
-         }
-        tam--;
-        return true;          
-     }
- else
-     return false;
+void lista<T>::borrar(int clave)
+{	nodo <T> *temp;
+	temp = cab;
+	if(cab == NULL){
+		cout << "No hay nada para borrar" << endl;
+	}
+	else{
+		if(clave == cab->clave){
+			cab = temp->sig;
+			delete temp;
+		}
+		else{
+			nodo <T> *anterior;
+			
+			while(clave != temp->clave && temp->sig != NULL){
+				anterior = temp;
+				temp = temp->sig;
+			}
+			
+			anterior->sig = temp->sig; 
+			delete temp;
+		}
+	}
+	tam--;
 }
 
 template <class T>
