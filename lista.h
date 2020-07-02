@@ -6,7 +6,8 @@ using namespace std;
 
 template <class T>
 struct nodo {T Dato;
-             nodo<T> * sig;};
+             nodo<T> * sig;
+			 int clave;};
 
 
 template <class T>
@@ -15,9 +16,7 @@ class lista{nodo <T> *cab;
 			
 	public: lista(){cab=NULL; tam=0;}
 			bool lista_vacia();
-			void insertar(T info, int pos);
-			void insertar_final(T info);
-			void insertar_inicio(T info);
+			void insertar(int codigo, T info);
 			bool borrar(int pos);
 			bool buscar (int pos, T *infoRet);
 			bool cambiar(int pos, T infoNueva);	
@@ -38,53 +37,37 @@ bool lista<T>::lista_vacia()
 }
 
 template <class T>
-void lista <T>::insertar(T info, int pos)
-{int p;
- if (pos>tam)
-	insertar_final(info);
- else if (pos == 1)
- 		insertar_inicio(info);
- 	else{nodo <T> *nuevo, *Aux;
- 	     nuevo = new nodo <T>;
- 	     nuevo->Dato = info;
- 	     Aux=cab;
- 	     p=1;
- 	     while(p<pos-1 && Aux!= NULL)
- 	     {Aux=Aux->sig;
- 	      p++;
-		  }
-		 nuevo->sig = Aux->sig;
-		 Aux->sig= nuevo;
-		 tam++; 
-	 }	
-}
-
-template <class T>
-void lista<T>::insertar_final(T infoNueva)
-{ nodo <T> *nuevo;
-  nuevo = new nodo <T>;
-  nuevo->Dato = infoNueva;
-  nuevo->sig = NULL;
-  if(tam == 0)
-    {cab = nuevo;}
-  else
-    {nodo <T> *aux;
-     aux = cab;
-     while(aux->sig != NULL)
-        {aux = aux->sig;}
-     aux->sig = nuevo;
-    }
-  tam++;
-}
-
-template <class T>
-void lista<T>::insertar_inicio(T infoNueva)
-{ nodo <T> *nuevo;
-  nuevo = new nodo <T>;
-  nuevo->Dato = infoNueva;
-  nuevo->sig = cab;
-  cab = nuevo;
-  tam++;
+void lista <T>::insertar(int codigo, T info)
+{
+	nodo <T> *nuevo = new nodo <T>;
+	nuevo->Dato = info;
+	
+	if(cab == NULL){
+		cab = nuevo;
+	}
+	else{
+		if(codigo<cab->clave){
+			nuevo->sig = cab;
+			cab = nuevo;
+		}
+		else{
+			nodo <T> *siguiente = cab;
+			nodo <T> *atras = cab;
+			
+			while(codigo >= siguiente->clave && siguiente->sig !=  NULL){
+				atras = siguiente;
+				siguiente = siguiente->sig;
+			}
+			
+			if(codigo >= siguiente->clave){
+				siguiente->sig = nuevo;
+			}
+			else{
+				nuevo->sig = siguiente;
+				atras->sig = nuevo;
+			}
+		}
+	}	
 }
 
 template <class T>
