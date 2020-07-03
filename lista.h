@@ -16,11 +16,13 @@ class lista{nodo <T> *cab;
 			
 	public: lista(){cab=NULL; tam=0;}
 			bool lista_vacia();
+			bool lista_llena();
 			void insertar(int codigo, T info);
 			void borrar(int clave);
-			bool buscar (int pos, T *infoRet);
+			bool buscar (int clave, T *infoRet);
+			bool pertenence(int clave);
 			bool cambiar(int pos, T infoNueva);	
-			void imprimir();
+			void recorrer();
 			int get_tam(){
 				return tam;
 			}
@@ -35,15 +37,6 @@ bool lista<T>::lista_vacia()
     return true;
  else
  	return false;
-}
-
-template <class T>
-void lista <T>::imprimir(){
-	nodo <T> *sig = cab;
-	while(sig != NULL){
-		cout << sig->Dato << endl;
-		sig = sig->sig;
-	}
 }
 
 template <class T>
@@ -110,20 +103,46 @@ void lista<T>::borrar(int clave)
 	}
 	tam--;
 }
-
 template <class T>
-bool lista<T>::buscar(int pos, T *infoRet)
+bool lista<T>::buscar(int clave, T *infoRet)
 {   nodo <T> *aux=cab;
-    int p = 1;
-    if (pos<=tam)
-	   { while(p<pos && aux != NULL)
-    		{aux = aux->sig;
-           	 p++;
+    if (clave>=aux->clave)
+	   { 
+	   	while(aux->clave!=clave && aux->clave<clave)	//Es bucle termina cuando encuentra la cable o llega a una clave mayor
+	   	{
+	   		aux = aux->sig;
+		}
+		if(aux->clave==clave){	//Se obtiene el valor si la clave se encuentra dentro de la lista
+    		*infoRet = aux->Dato;	
+    		return true;
     		}
-    	*infoRet = aux->Dato;	
-    	return true;
 		}
 	return false;
+}
+template <class T>
+bool lista<T>::pertenence(int clave){
+	nodo <T> *aux=cab;
+	if (clave>=aux->clave)
+	   { 
+	   	while(aux->clave!=clave && aux->clave<clave)	//Es bucle termina cuando encuentra la cable o llega a una clave mayor
+	   	{
+	   		aux = aux->sig;
+		}
+		if(aux->clave==clave){	// si la clave se encuentra dentro de la lista	
+    		return true;
+    		}
+		}
+	return false;
+}
+
+
+template <class T>
+void lista <T>::recorrer(){
+	nodo <T> *sig = cab;
+	while(sig != NULL){
+		cout << sig->Dato << endl;
+		sig = sig->sig;
+	}
 }
 
 template <class T>

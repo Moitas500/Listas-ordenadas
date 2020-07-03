@@ -12,7 +12,7 @@ struct persona{
 };
 
 int main(int argc, char** argv) {
-	int clave, inf;
+	int clave, inf=-1;
 	
 	lista<int> a;
 	
@@ -20,9 +20,18 @@ int main(int argc, char** argv) {
 	a.insertar(5,3);
 	a.insertar(6,4);
 	a.insertar(12,5);
-	a.imprimir();
+	a.recorrer();
+	a.buscar(6,& inf);
+	cout<<"caracter buscado "<<inf<<endl;
+	inf=-1;
+	//Si el caracter buscado no se encuentra aparecera -1
+	cout<<"Si esta "<<a.pertenence(6)<<endl;	//0 si no esta, 1 si si esta
 	a.borrar(6);
-	a.imprimir();
+	cout<<"Se ha borrado"<<endl;
+	a.recorrer();
+	cout<<"Si esta "<<a.pertenence(6)<<endl;	//0 si no esta, 1 si si esta
+	a.buscar(6,& inf);
+	cout<<"caracter  buscado "<<inf<<endl;
 
 	return 0;
 }
