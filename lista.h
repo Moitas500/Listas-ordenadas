@@ -21,7 +21,7 @@ class lista{nodo <T> *cab;
 			void borrar(int clave);
 			bool buscar (int clave, T *infoRet);
 			bool pertenence(int clave);
-			bool cambiar(int pos, T infoNueva);	
+			bool cambiar(int clave, T infoNueva);	
 			void recorrer();
 			int get_tam(){
 				return tam;
@@ -146,17 +146,19 @@ void lista <T>::recorrer(){
 }
 
 template <class T>
-bool lista<T>::cambiar(int pos, T infoNueva)
+bool lista<T>::cambiar(int clave, T infoNueva)
 { nodo <T> *aux=cab;
-  int p = 1;
-  if (pos<=tam)
-   { while(p<pos && aux != NULL)
-   		{aux = aux->sig;
-         p++;
-    	}
-     aux->Dato = infoNueva; 
-     return true;
-	}
+  if (clave>=aux->clave)
+	   { 
+	   	while(aux->clave!=clave && aux->clave<clave)	//Es bucle termina cuando encuentra la cable o llega a una clave mayor
+	   	{
+	   		aux = aux->sig;
+		}
+		if(aux->clave==clave){
+			aux->Dato = infoNueva;
+			return true;
+		}
+		}
   return false;	
 }	
 

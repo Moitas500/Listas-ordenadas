@@ -32,6 +32,8 @@ int main(int argc, char** argv) {
 	cout<<"Si esta "<<a.pertenence(6)<<endl;	//0 si no esta, 1 si si esta
 	a.buscar(6,& inf);
 	cout<<"caracter  buscado "<<inf<<endl;
-
+	a.cambiar(5,10);
+	cout<<"caracter  cambiado: "<<endl;
+	a.recorrer();
 	return 0;
 }
