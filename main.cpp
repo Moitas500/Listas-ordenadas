@@ -1,3 +1,8 @@
+/*
+Julieth Tatiana Riaño Mora - 20181020107
+Juan David Rosero Torres - 20181020071
+Cristian Camilo Martinez Rey 20181020021
+*/
 #include <iostream>
 #include <cstdlib>
 #include "lista.h"
@@ -32,7 +37,7 @@ int main(int argc, char** argv) {
 	cout<<"Si esta "<<a.pertenence(6)<<endl;	//0 si no esta, 1 si si esta
 	a.buscar(6,& inf);
 	cout<<"caracter  buscado "<<inf<<endl;
-	a.cambiar(5,10);
+	a.asignarInfo(5,10);
 	cout<<"caracter  cambiado: "<<endl;
 	a.recorrer();
 	return 0;
